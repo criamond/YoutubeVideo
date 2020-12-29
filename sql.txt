@@ -1,0 +1,10 @@
+CREATE TABLE `Videos` (
+	`VideoID` CHAR(50) NULL,
+	`ViewsCount` INT NULL,
+	`Likes` INT NULL,
+	`Dislikes` INT NULL,
+	`CommentsCount` INT NULL,
+	`SubscribersCount` INT NULL
+)
+COLLATE='utf8mb4_0900_ai_ci'
+;
