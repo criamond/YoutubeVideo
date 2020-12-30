@@ -10,7 +10,9 @@ class YouTubeAPI{
     {
         $json_result = json_decode(file_get_contents ("https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&fields=items(id,snippet(channelId,title,categoryId,description,thumbnails),statistics)&part=snippet,statistics"));
         //var_dump($json_result);
-        return $json_result->items[0];
+        $res=$json_result->items[0];
+
+        return $res;
 
     }
 
@@ -34,6 +36,6 @@ $channelcount=$ch->statistics->subscriberCount;
 
 $r=0;
 
-
+?>
 
 
