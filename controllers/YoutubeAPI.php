@@ -23,19 +23,6 @@ class YouTubeAPI{
         return $json_result->items[0];
     }
 }
-
-$vid=new YouTubeAPI();
-$st=$vid->getVideoStat('eXQATmoBSI4');
-
-
-$ch=$vid->getChannelStat();
-
-$channelTitle=$ch->snippet->title;
-$channelcount=$ch->statistics->subscriberCount;
-
-
-$r=0;
-
 ?>
 
 
