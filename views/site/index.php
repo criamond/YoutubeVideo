@@ -7,26 +7,59 @@ Welcome to the Video Paradise :)
 <?php
 use miloschuman\highcharts\Highcharts;
 
+
+echo Highcharts::widget([
+    'options' => '{
+      "title": { "text": "Fruit Consumption" },
+      "xAxis": {
+         "type": "datetime",
+         "dateTimeLabelFormats": {"day": "%e of %b"}
+      },
+      "yAxis": {
+         "title": { "text": "Fruit eaten" }
+      },
+      "plotOptions": { 
+          "series": {
+                "pointInterval": 3600000, 
+                "pointStart": "Date.UTC(2020, 0, 1)"
+          }
+      },
+      "series": [
+         { "name": "Jane", "data": [1, 0, 4] },
+         { "name": "John", "data": [5, 7,3] }
+      ]
+   }'
+]);
+
+
+
+
+
 echo Highcharts::widget([
     'options' => [
-        'title' => ['text' => 'Fruit Consumption'],
+        'title' => ['text' => 'Video Statistics '],
         'xAxis' => [
-            'categories' => ['Apples', 'Bananas', 'Oranges']
+            'type' => 'datetime',
+            'dateTimeLabelFormats' => ['day' => '%e of %b']
         ],
         'yAxis' => [
             'title' => ['text' => 'Fruit eaten']
         ],
+        'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000, 'pointStart'=> 'Date.UTC(2020, 0, 1)']],
+//,
         'series' => [
-            ['name' => 'Jane', 'data' => [1, 0, 4]],
-            ['name' => 'John', 'data' => [5, 7, 3]]
+            ['name' => 'Views', 'data' => [1, 0, 4]],
+            ['name' => 'Likes', 'data' => [5, 7, 3]]
+
         ]
     ]
 ]);
 
 
+
 echo Highcharts::widget([
     'options' => [
-        'title' => ['text' => 'Fruit Consumption'],
+        'title' => ['text' => 'Video Statistics '],
         'xAxis' => [
             'type' => 'datetime',
             'dateTimeLabelFormats' => ['day' => '%e of %b']
@@ -37,13 +70,12 @@ echo Highcharts::widget([
         'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
 //'pointStart'=> 'Date.UTC(2010, 0, 1)',
         'series' => [
-            ['name' => 'Jane', 'data' => [1, 0, 4],],
-            ['name' => 'John', 'data' => [5, 7, 3]]
+            ['name' => 'Views', 'data' => [1, 0, 4]],
+            ['name' => 'Likes', 'data' => [5, 7, 3]]
 
         ]
     ]
 ]);
-
 
 
 ?>
