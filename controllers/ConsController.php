@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use yii\console\Controller;
 
-class MailerController extends Controller
+class ConsController extends Controller
 {
-    public function actionSend(){
+    public function actionUpdatedb(){
+        
+        
         echo "hell!";
         die;
     }
