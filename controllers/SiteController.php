@@ -18,9 +18,16 @@ class SiteController extends Controller
 
         $videos_array = $videoList->find()->asarray()->all();
 
-        $vidos=$videoRec->find()->groupby("VideoID")->asarray()->all();
+        for($i=0;$i<count($videos_array);$i++){
+            $currentVideoID=$videos_array[$i]['VideoID'];
+            $VideoStat[$i]=$videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
+        }
 
-        return $this->render('index');
+
+
+        //vid[0]->vidID,датавремя, count....
+
+        return $this->render('index', compact('videos_array','VideoStat'));
     }
 
 

@@ -8,7 +8,41 @@ Welcome to the Video Paradise :)
 use miloschuman\highcharts\Highcharts;
 
 
-echo Highcharts::widget([
+for($i=0;$i<count($videos_array);$i++){
+    echo $videos_array[$i]["VideoName"];
+    for($j=0;$j<count($VideoStat[$i]);$j++){
+        $ViewsCountArray[$j]=$VideoStat[$i][$j]['ViewsCount'];
+        $LikesArray[$j]=$VideoStat[$i][$j]['Likes'];
+        $DislikesArray[$j]=$VideoStat[$i][$j]['Dislikes'];
+        $CommentsCountArray[$j]=$VideoStat[$i][$j]['CommentsCount'];
+        $SubscribersCountArray[$j]=$VideoStat[$i][$j]['SubscribersCount'];
+    }
+    echo Highcharts::widget([
+                                'options' => [
+                                    'title' => ['text' => 'Video Statistics '],
+                                    'xAxis' => [
+                                        'type' => 'datetime',
+                                        'dateTimeLabelFormats' => ['day' => '%e of %b']
+                                    ],
+                                    'yAxis' => [
+                                        'title' => ['text' => 'Fruit eaten']
+                                    ],
+                                    'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
+//'pointStart'=> 'Date.UTC(2010, 0, 1)',
+                                    'series' => [
+                                        ['name' => 'Views', 'data' => $ViewsCountArray] ////,
+                                        ['name' => 'Likes', 'data' => $LikesArray]
+
+                                    ]
+                                ]
+                            ]);
+
+}
+
+
+
+/*
+ * echo Highcharts::widget([
     'options' => '{
       "title": { "text": "Fruit Consumption" },
       "xAxis": {
@@ -31,9 +65,9 @@ echo Highcharts::widget([
    }'
 ]);
 
+*/
 
-
-
+$dat=[1,5,8,8,8,9];
 
 echo Highcharts::widget([
     'options' => [
@@ -45,11 +79,10 @@ echo Highcharts::widget([
         'yAxis' => [
             'title' => ['text' => 'Fruit eaten']
         ],
-        'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000, 'pointStart'=> 'Date.UTC(2020, 0, 1)']],
-//,
+        'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
+//, , 'pointStart'=> 'Date.UTC(2020, 0, 1)'
         'series' => [
-            ['name' => 'Views', 'data' => [1, 0, 4]],
-            ['name' => 'Likes', 'data' => [5, 7, 3]]
+            ['name' => 'Views', 'data' => $dat],
 
         ]
     ]

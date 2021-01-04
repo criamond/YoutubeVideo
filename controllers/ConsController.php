@@ -14,7 +14,7 @@ use app\models\Videolist;
 class ConsController extends Controller
 {
 
-    public function actionInit()
+    public function actionInit(array $argum =null)
     {
         $videos = $GLOBALS["argv"];
         $videos = array_slice($videos, 2);
