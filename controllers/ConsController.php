@@ -18,41 +18,9 @@ class ConsController extends Controller
         $videos = (new Request)->getParams(); // $GLOBALS["argv"];
         $videos = array_slice($videos, 1);
 
-        if (\Yii::$app->db->getTableSchema('{{%videolist}}', true) == null) {
-            // работа с таблицей
-            \Yii::$app->db->createCommand(
-                "CREATE TABLE `videolist` (
-	`VideoID` varchar(50) NULL,
-	`VideoName` TEXT,
-	`VideoDescription` TEXT,
-	`ChannelName` TEXT,
-	`thumb` varchar(50) NULL
-)
-COLLATE='utf8mb4_0900_ai_ci'
-;"
-            )->execute();
-        }
-
-        if (\Yii::$app->db->getTableSchema('{{%videos}}', true) == null) {
-            // работа с таблицей
-            \Yii::$app->db->createCommand(
-                "CREATE TABLE `Videos` (
-	`DateTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-	`VideoID` varchar(50) NULL,
-	`ViewsCount` INT NULL,
-	`Likes` INT NULL,
-	`Dislikes` INT NULL,
-	`CommentsCount` INT NULL,
-	`SubscribersCount` INT NULL
-)
-COLLATE='utf8mb4_0900_ai_ci'
-;"
-            )->execute();
-        }
-
         $vid = new YouTubeAPI();
         $videoRec = new Videolist;
-
+        //очистка таблиц, новые видео все таки
         Videolist::deleteAll();
         Video::deleteAll();
 
@@ -85,7 +53,6 @@ COLLATE='utf8mb4_0900_ai_ci'
             $channelStat = $vid->getChannelStat($videoStat->snippet->channelId);
             $channelTitle = $channelStat->snippet->title;
             $channelcount = $channelStat->statistics->subscriberCount;
-
             echo "$channelTitle $channelcount\r\n ";
 
             $videoRec->SubscribersCount = $channelStat->statistics->subscriberCount;

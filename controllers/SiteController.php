@@ -18,7 +18,7 @@ class SiteController extends Controller
         foreach ($videos_array as $key => $videos_array_item) {
             $currentVideoID = $videos_array_item['VideoID'];
             //$VideoStat[] = $videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
-            $VideoStat=$videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
+            $VideoStat = $videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
             foreach ($VideoStat as $vidData) {
                 $ViewsCountArray[$key][] = (int)$vidData['ViewsCount'];
                 $LikesArray[$key][] = (int)$vidData['Likes'];
@@ -32,7 +32,18 @@ class SiteController extends Controller
 
 
         //return $this->render('index', compact('videos_array', 'VideoStat'));
-        return $this->render('index', compact('videos_array', 'ViewsCountArray', 'LikesArray', 'DislikesArray', 'CommentsCountArray', 'SubscribersCountArray', 'DateTimeCategories'));
+        return $this->render(
+            'index',
+            compact(
+                'videos_array',
+                'ViewsCountArray',
+                'LikesArray',
+                'DislikesArray',
+                'CommentsCountArray',
+                'SubscribersCountArray',
+                'DateTimeCategories'
+            )
+        );
     }
 
 }
