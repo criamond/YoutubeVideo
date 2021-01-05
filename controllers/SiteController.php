@@ -15,12 +15,24 @@ class SiteController extends Controller
 
         $videos_array = $videoList->find()->asarray()->all();
 
-        foreach ($videos_array as $videos_array_item) {
+        foreach ($videos_array as $key => $videos_array_item) {
             $currentVideoID = $videos_array_item['VideoID'];
-            $VideoStat[] = $videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
+            //$VideoStat[] = $videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
+            $VideoStat=$videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
+            foreach ($VideoStat as $vidData) {
+                $ViewsCountArray[$key][] = (int)$vidData['ViewsCount'];
+                $LikesArray[$key][] = (int)$vidData['Likes'];
+
+                $DislikesArray[$key][] = (int)$vidData['Dislikes'];
+                $CommentsCountArray[$key][] = (int)$vidData['CommentsCount'];
+                $SubscribersCountArray[$key][] = (int)$vidData['SubscribersCount'];
+                $DateTimeCategories[$key][] = $vidData['DateTime'];
+            }
         }
 
-        return $this->render('index', compact('videos_array', 'VideoStat'));
+
+        //return $this->render('index', compact('videos_array', 'VideoStat'));
+        return $this->render('index', compact('videos_array', 'ViewsCountArray', 'LikesArray', 'DislikesArray', 'CommentsCountArray', 'SubscribersCountArray', 'DateTimeCategories'));
     }
 
 }

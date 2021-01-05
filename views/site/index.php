@@ -20,14 +20,6 @@ for ($i = 0; $i < count($videos_array); $i++) {
         </div>
 
         <?php
-        for ($j = 0; $j < count($VideoStat[$i]); $j++) {
-            $ViewsCountArray[$j] = (int)$VideoStat[$i][$j]['ViewsCount'];
-            $LikesArray[$j] = (int)$VideoStat[$i][$j]['Likes'];
-            $DislikesArray[$j] = (int)$VideoStat[$i][$j]['Dislikes'];
-            $CommentsCountArray[$j] = (int)$VideoStat[$i][$j]['CommentsCount'];
-            $SubscribersCountArray[$j] = (int)$VideoStat[$i][$j]['SubscribersCount'];
-            $DateTimeCategories[$j] = $VideoStat[$i][$j]['DateTime'];
-        }
         echo Highcharts::widget(
             [
                 'options' => [
@@ -35,7 +27,7 @@ for ($i = 0; $i < count($videos_array); $i++) {
                     'xAxis' => array(
                         'type' => 'datetime',
                         //'dateTimeLabelFormats' => array('day' => '%e of %b'),
-                        'categories' => $DateTimeCategories
+                        'categories' => $DateTimeCategories[$i]
                     ),
                     'yAxis' => [
 
@@ -43,11 +35,11 @@ for ($i = 0; $i < count($videos_array); $i++) {
                     ],
                     // 'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000],'pointStart'=> 'Date.UTC(2010, 10, 11)'],
                     'series' => [
-                        ['name' => 'Views', 'data' => $ViewsCountArray],
-                        ['name' => 'Likes', 'data' => $LikesArray],
-                        ['name' => 'Dislikes', 'data' => $DislikesArray],
-                        ['name' => 'CommentsCount', 'data' => $CommentsCountArray],
-                        ['name' => 'SubscribersCount', 'data' => $SubscribersCountArray]
+                        ['name' => 'Views', 'data' => $ViewsCountArray[$i]],
+                        ['name' => 'Likes', 'data' => $LikesArray[$i]],
+                        ['name' => 'Dislikes', 'data' => $DislikesArray[$i]],
+                        ['name' => 'CommentsCount', 'data' => $CommentsCountArray[$i]],
+                        ['name' => 'SubscribersCount', 'data' => $SubscribersCountArray[$i]]
 
                     ]
                 ]
