@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 
-
 use app\controllers\YoutubeAPI;
 use yii\console\Controller;
 use app\models\Video;
 use app\models\Videolist;
+use yii\console\Request;
 
 
 class ConsController extends Controller
@@ -15,8 +15,8 @@ class ConsController extends Controller
 
     public function actionInit(array $argum = null)
     {
-        $videos = $GLOBALS["argv"];
-        $videos = array_slice($videos, 2);
+        $videos = (new Request)->getParams(); // $GLOBALS["argv"];
+        $videos = array_slice($videos, 1);
 
         if (\Yii::$app->db->getTableSchema('{{%videolist}}', true) == null) {
             // работа с таблицей
@@ -53,8 +53,8 @@ COLLATE='utf8mb4_0900_ai_ci'
         $vid = new YouTubeAPI();
         $videoRec = new Videolist;
 
-        $videoRec->deleteAll();
-        $result = Video::deleteAll();
+        Videolist::deleteAll();
+        Video::deleteAll();
 
         foreach ($videos as $video) {
             $videoStat = $vid->getVideoStat($video);

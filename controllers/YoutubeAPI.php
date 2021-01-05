@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\controllers;
 
 
@@ -13,7 +12,7 @@ class YoutubeAPI
         //$json_result = json_decode(file_get_contents ("https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&fields=items(id,snippet(channelId,title,categoryId,description,thumbnails),statistics)&part=snippet,statistics"));
         $json_result = json_decode(
             $this->Request(
-                "https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&".
+                "https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&" .
                 "fields=items(id,snippet(channelId,title,categoryId,description,thumbnails),statistics)&part=snippet,statistics"
             )
         );
@@ -40,6 +39,10 @@ class YoutubeAPI
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        if($result===false) die("CURL error $err"); else return $result;
+        if ($result === false) {
+            die("CURL error $err");
+        } else {
+            return $result;
+        }
     }
 }
