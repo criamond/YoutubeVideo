@@ -23,22 +23,7 @@ class SiteController extends Controller
             $VideoStat[$i]=$videoRec->find()->where(['VideoID' => $currentVideoID])->asarray()->all();
         }
 
-
-
-        //vid[0]->vidID,датавремя, count....
-
         return $this->render('index', compact('videos_array','VideoStat'));
-    }
-
-
-    public function actionKiss()
-    {
-        return $this->render('index');
-    }
-
-    public function actionFuck()
-    {
-        return $this->render('index');
     }
 
 }

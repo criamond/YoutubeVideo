@@ -38,7 +38,7 @@ class YouTubeAPI
         $result = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch);
-        return $result;
+        if($result===false) die("CURL error $err"); else return $result;
     }
 }
 

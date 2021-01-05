@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\controllers;
 
 require __DIR__ . "/../YoutubeAPI.php";
@@ -14,21 +13,30 @@ use app\models\Videolist;
 class ConsController extends Controller
 {
 
-    public function actionInit(array $argum =null)
+    public function actionInit(array $argum = null)
     {
         $videos = $GLOBALS["argv"];
         $videos = array_slice($videos, 2);
 
-        $vid = new YouTubeAPI();
-        $videoRec = new Videolist;
 
-        //проверить есть ли и создать БД
+        //проверить есть ли и создать БД show databases like 'db_name'
+
+        $CHeckExistDB = \Yii::$app->db->createCommand(
+            "show databases like 'youtubestats';"
+        )->execute();
+
+        if ($CHeckExistDB == 0) {
+            \Yii::$app->db->createCommand(
+                "CREATE DATABASE `youtubestats`;"
+            )->execute();
+        }
+
 
         if (\Yii::$app->db->getTableSchema('{{%videolist}}', true) == null) {
             // работа с таблицей
             \Yii::$app->db->createCommand(
                 "CREATE TABLE `videolist` (
-	`VideoID` CHAR(50) NULL,
+	`VideoID` varchar(50) NULL,
 	`VideoName` TEXT,
 	`VideoDescription` TEXT,
 	`ChannelName` TEXT,
@@ -43,8 +51,8 @@ COLLATE='utf8mb4_0900_ai_ci'
             // работа с таблицей
             \Yii::$app->db->createCommand(
                 "CREATE TABLE `Videos` (
-	`DateTime` DATETIME,
-	`VideoID` CHAR(50) NULL,
+	`DateTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+	`VideoID` varchar(50) NULL,
 	`ViewsCount` INT NULL,
 	`Likes` INT NULL,
 	`Dislikes` INT NULL,
@@ -56,10 +64,11 @@ COLLATE='utf8mb4_0900_ai_ci'
             )->execute();
         }
 
+        $vid = new YouTubeAPI();
+        $videoRec = new Videolist;
 
-        //тут хорошо бы создать если нет, создать статсу табл
         $videoRec->deleteAll();
-        $result=Video::deleteAll();
+        $result = Video::deleteAll();
 
         foreach ($videos as $video) {
             $videoStat = $vid->getVideoStat($video);
@@ -72,7 +81,7 @@ COLLATE='utf8mb4_0900_ai_ci'
             $videoRec->thumb = $videoStat->snippet->thumbnails->default->url;
             $videoRec->insert();
         }
-        die;
+        die("Init is OK");
     }
 
     public function actionUpdatedb()
@@ -102,7 +111,7 @@ COLLATE='utf8mb4_0900_ai_ci'
             $videoRec->insert();
         }
 
-        die;
+        die("Update is OK");
     }
 
 }
