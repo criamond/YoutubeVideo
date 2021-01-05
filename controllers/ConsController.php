@@ -19,18 +19,6 @@ class ConsController extends Controller
         $videos = array_slice($videos, 2);
 
 
-        //проверить есть ли и создать БД show databases like 'db_name'
-
-        $CHeckExistDB = \Yii::$app->db->createCommand(
-            "show databases like 'youtubestats';"
-        )->execute();
-
-        if ($CHeckExistDB == 0) {
-            \Yii::$app->db->createCommand(
-                "CREATE DATABASE `youtubestats`;"
-            )->execute();
-        }
-
 
         if (\Yii::$app->db->getTableSchema('{{%videolist}}', true) == null) {
             // работа с таблицей

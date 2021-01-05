@@ -18,7 +18,7 @@ class YouTubeAPI
         return $json_result->items[0];
     }
 
-    function getChannelStat($idChannel = 'UCFPC7r3tWWXWzUIROLx46mg')
+    public function getChannelStat($idChannel = 'UCFPC7r3tWWXWzUIROLx46mg')
     {
         $json_result = json_decode(
             $this->Request(
@@ -29,7 +29,7 @@ class YouTubeAPI
     }
 
 
-    function Request($url)
+    public function Request($url)
     {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
