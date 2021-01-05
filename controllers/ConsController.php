@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-require __DIR__ . "/../YoutubeAPI.php";
 
+
+use app\controllers\YoutubeAPI;
 use yii\console\Controller;
-use Superproject\YouTubeVideo\YouTubeAPI;
 use app\models\Video;
 use app\models\Videolist;
 
@@ -17,8 +17,6 @@ class ConsController extends Controller
     {
         $videos = $GLOBALS["argv"];
         $videos = array_slice($videos, 2);
-
-
 
         if (\Yii::$app->db->getTableSchema('{{%videolist}}', true) == null) {
             // работа с таблицей
