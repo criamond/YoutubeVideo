@@ -1,37 +1,38 @@
-<h1>Video School</h1>
-
-
-Welcome to the Video Paradise :)
 
 
 <?php
 use miloschuman\highcharts\Highcharts;
-
+use yii\web\JsExpression;
 
 for($i=0;$i<count($videos_array);$i++){
     echo $videos_array[$i]["VideoName"];
     for($j=0;$j<count($VideoStat[$i]);$j++){
-        $ViewsCountArray[$j]=$VideoStat[$i][$j]['ViewsCount'];
-        $LikesArray[$j]=$VideoStat[$i][$j]['Likes'];
-        $DislikesArray[$j]=$VideoStat[$i][$j]['Dislikes'];
-        $CommentsCountArray[$j]=$VideoStat[$i][$j]['CommentsCount'];
-        $SubscribersCountArray[$j]=$VideoStat[$i][$j]['SubscribersCount'];
+        $ViewsCountArray[$j]=(int) $VideoStat[$i][$j]['ViewsCount'];
+        $LikesArray[$j]=(int) $VideoStat[$i][$j]['Likes'];
+        $DislikesArray[$j]=(int) $VideoStat[$i][$j]['Dislikes'];
+        $CommentsCountArray[$j]=(int) $VideoStat[$i][$j]['CommentsCount'];
+        $SubscribersCountArray[$j]=(int) $VideoStat[$i][$j]['SubscribersCount'];
+        $DateTimeCategories[$j]=$VideoStat[$i][$j]['DateTime'];
     }
     echo Highcharts::widget([
                                 'options' => [
                                     'title' => ['text' => 'Video Statistics '],
-                                    'xAxis' => [
+                                    'xAxis' => array(
                                         'type' => 'datetime',
-                                        'dateTimeLabelFormats' => ['day' => '%e of %b']
-                                    ],
+                                        //'dateTimeLabelFormats' => array('day' => '%e of %b'),
+                                        'categories' => $DateTimeCategories
+                                    ),
                                     'yAxis' => [
-                                        'title' => ['text' => 'Fruit eaten']
+
+                                        'title' => ['text' => '']
                                     ],
-                                    'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
-//'pointStart'=> 'Date.UTC(2010, 0, 1)',
+                                   // 'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000],'pointStart'=> 'Date.UTC(2010, 10, 11)'],
                                     'series' => [
-                                        ['name' => 'Views', 'data' => $ViewsCountArray] ////,
-                                        ['name' => 'Likes', 'data' => $LikesArray]
+                                        ['name' => 'Views', 'data' => $ViewsCountArray] ,
+                                        ['name' => 'Likes', 'data' => $LikesArray],
+                                        ['name' => 'Dislikes', 'data' => $DislikesArray],
+                                        ['name' => 'CommentsCount', 'data' => $CommentsCountArray],
+                                        ['name' => 'SubscribersCount', 'data' => $SubscribersCountArray]
 
                                     ]
                                 ]
@@ -41,74 +42,6 @@ for($i=0;$i<count($videos_array);$i++){
 
 
 
-/*
- * echo Highcharts::widget([
-    'options' => '{
-      "title": { "text": "Fruit Consumption" },
-      "xAxis": {
-         "type": "datetime",
-         "dateTimeLabelFormats": {"day": "%e of %b"}
-      },
-      "yAxis": {
-         "title": { "text": "Fruit eaten" }
-      },
-      "plotOptions": { 
-          "series": {
-                "pointInterval": 3600000, 
-                "pointStart": "Date.UTC(2020, 0, 1)"
-          }
-      },
-      "series": [
-         { "name": "Jane", "data": [1, 0, 4] },
-         { "name": "John", "data": [5, 7,3] }
-      ]
-   }'
-]);
-
-*/
-
-$dat=[1,5,8,8,8,9];
-
-echo Highcharts::widget([
-    'options' => [
-        'title' => ['text' => 'Video Statistics '],
-        'xAxis' => [
-            'type' => 'datetime',
-            'dateTimeLabelFormats' => ['day' => '%e of %b']
-        ],
-        'yAxis' => [
-            'title' => ['text' => 'Fruit eaten']
-        ],
-        'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
-//, , 'pointStart'=> 'Date.UTC(2020, 0, 1)'
-        'series' => [
-            ['name' => 'Views', 'data' => $dat],
-
-        ]
-    ]
-]);
-
-
-
-echo Highcharts::widget([
-    'options' => [
-        'title' => ['text' => 'Video Statistics '],
-        'xAxis' => [
-            'type' => 'datetime',
-            'dateTimeLabelFormats' => ['day' => '%e of %b']
-        ],
-        'yAxis' => [
-            'title' => ['text' => 'Fruit eaten']
-        ],
-        'plotOptions' => ['series' => ['pointInterval'=> 3600 * 1000]],
-//'pointStart'=> 'Date.UTC(2010, 0, 1)',
-        'series' => [
-            ['name' => 'Views', 'data' => [1, 0, 4]],
-            ['name' => 'Likes', 'data' => [5, 7, 3]]
-
-        ]
-    ]
-]);
 
 
 ?>
