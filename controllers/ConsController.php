@@ -13,7 +13,7 @@ use yii\console\Request;
 class ConsController extends Controller
 {
 
-    public function actionInit(array $argum = null)
+    public function actionInit()
     {
         $videos = (new Request)->getParams(); // $GLOBALS["argv"];
         $videos = array_slice($videos, 1);
