@@ -7,9 +7,8 @@ class YoutubeAPI
 {
     private $Apikey = "AIzaSyDbn9T0KXiqXATEF9Nm5w9PL6WaNwymshM";
 
-    public function getVideoStat($idVideo = 'eXQATmoBSI4')///: array
+    public function getVideoStat($idVideo = 'eXQATmoBSI4')
     {
-        //$json_result = json_decode(file_get_contents ("https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&fields=items(id,snippet(channelId,title,categoryId,description,thumbnails),statistics)&part=snippet,statistics"));
         $json_result = json_decode(
             $this->Request(
                 "https://www.googleapis.com/youtube/v3/videos?id=$idVideo&key=$this->Apikey&" .
