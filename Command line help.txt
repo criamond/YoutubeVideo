@@ -1,4 +1,4 @@
-yii cons/init eXQATmoBSI4 .... other videos
+yii cons/init recHRnwvAaY DSJ0xWj2gAA Ckom3gf57Yw .... other videoIDs
 
 yii cons/updatedb command for crontab file
 
